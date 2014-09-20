@@ -27,10 +27,11 @@ public class SharedPrefsUtils {
     public static void saveConfigFile(Context context,RealTimeConfig RTC){
         Gson gs = new Gson();
 
-
        SharedPrefsUtils.setString("ConfFile",
                gs.toJson(RTC),
                 context.getApplicationContext(), "AlarmApp");
 
     }
+
+    
 }

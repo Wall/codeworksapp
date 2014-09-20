@@ -3,6 +3,7 @@ package com.bluewall.trafficalarm;
 import android.util.Log;
 
 import com.bluewall.trafficalarm.model.RealTimeConfig;
+import com.bluewall.trafficalarm.model.Route;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -10,6 +11,7 @@ import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONException;
@@ -40,9 +42,10 @@ public class DataInterface {
         return response;
     }
 
-    public static int getConfig() throws IOException, JSONException {
+    public static RealTimeConfig getConfig() throws IOException, JSONException {
 
         URL cUrl = new URL(CONFIG_URL);
+
         HttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(CONFIG_URL);
         httpGet.addHeader(BasicScheme.authenticate(
@@ -74,11 +77,12 @@ public class DataInterface {
 
         RealTimeConfig RTC = new RealTimeConfig(selfConfigUrl,routeConfigUrl,progressConfigUrl,eventsConfigUrl);
 
+        //SharedPrefsUtils.saveConfigFile(,RTC);
         Log.i("STREAM",routeConfigUrl);
 
 
 
-        return 0;
+        return RTC;
     }
 
     public static int getEvents() throws IOException {
@@ -105,19 +109,22 @@ public class DataInterface {
 
     }
 
-    public static int getRoute() throws IOException {
+    public static Route getRoute(Route routeData) throws IOException {
 
         HttpClient httpClient = new DefaultHttpClient();
-        HttpPost httt = new HttpPost(ROUTE_URL);
-       // httt.
-        httt.addHeader(BasicScheme.authenticate(
+        HttpPost httpPost = new HttpPost(ROUTE_URL);
+
+        StringEntity params =new StringEntity(routeData.getRoute());
+        httpPost.setEntity(params);
+
+        httpPost.addHeader(BasicScheme.authenticate(
                 new UsernamePasswordCredentials("ttdsUser", "password"),
                 "UTF-8", false));
 
 
         HttpResponse httpResponse = null;
         try {
-            httpResponse = httpClient.execute(httt);
+            httpResponse = httpClient.execute(httpPost);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,7 +132,10 @@ public class DataInterface {
 
         Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
 
-        return 0;
+
+        Route newRouteData = new Route(responseEntity.getContent().toString());
+
+        return newRouteData;
 
     }
 }

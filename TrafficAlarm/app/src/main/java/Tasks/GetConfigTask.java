@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.bluewall.trafficalarm.DataInterface;
+import com.bluewall.trafficalarm.MainActivity;
+import com.bluewall.trafficalarm.SharedPrefsUtils;
+import com.bluewall.trafficalarm.model.RealTimeConfig;
 
 /**
  * Created by Barney on 20/09/2014.
  */
 public class GetConfigTask {
     private Context context;
+    protected MainActivity activity;
 
 
     public GetConfigTask(Context context) {
@@ -22,9 +26,9 @@ public class GetConfigTask {
     }
 
     private class GetConfigTaskAsyncTask extends
-            AsyncTask<Void, Integer, Integer> {
+            AsyncTask<Void, Integer, RealTimeConfig> {
 
-        protected Integer doInBackground(Void... urls) {
+        protected RealTimeConfig doInBackground(Void... urls) {
 
             try {
                 return DataInterface.getConfig();
@@ -33,11 +37,12 @@ public class GetConfigTask {
                 e.printStackTrace();
 
             }
-            return 0;
+            return null;
         }
 
-        protected void onPostExecute(int result) {
+        protected void onPostExecute(RealTimeConfig result) {
 
+            SharedPrefsUtils.saveConfigFile(context, result);
             }
         }
     }

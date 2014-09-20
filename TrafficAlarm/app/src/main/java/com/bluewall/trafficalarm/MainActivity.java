@@ -40,7 +40,6 @@ public class MainActivity extends Activity
      */
     private CharSequence mTitle;
 
-    //DataInterface DFace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,6 @@ public class MainActivity extends Activity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-       // DFace.getTTDSConfig();
        // Log.i("Hello", "");
       //  new GetEventTask(this).run();
         new GetConfigTask(this).run();
