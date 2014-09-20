@@ -22,6 +22,8 @@ public class DataInterface {
 
     final static String CONFIG_URL = "http://ec2-54-79-116-215.ap-southeast-2.compute.amazonaws.com/config";
 
+    final static String EVENT_URL = "http://ec2-54-79-116-215.ap-southeast-2.compute.amazonaws.com/events";
+
     private static String convertStreamToString(InputStream is) {
         Scanner s = new Scanner(is, "UTF-8");
         s.useDelimiter("\\A");
@@ -52,5 +54,29 @@ public class DataInterface {
         Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
 
         return 0;
+    }
+
+    public static int getEvents() throws IOException {
+
+       // URL cUrl = new URL(CONFIG_URL);
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet(EVENT_URL);
+        httpGet.addHeader(BasicScheme.authenticate(
+                new UsernamePasswordCredentials("ttdsUser", "password"),
+                "UTF-8", false));
+
+
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = httpClient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        HttpEntity responseEntity = httpResponse.getEntity();
+
+        Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
+
+        return 0;
+
     }
 }

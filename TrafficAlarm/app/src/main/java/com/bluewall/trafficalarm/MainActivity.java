@@ -21,6 +21,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import Tasks.GetConfigTask;
+import Tasks.GetEventsTask;
 
 //import com.bluewall.trafficalarm.Tasks.GetConfigTask;
 //import com.bluewall.trafficalarm.Tasks.GetEventTask;
@@ -57,7 +58,7 @@ public class MainActivity extends Activity
        // DFace.getTTDSConfig();
        // Log.i("Hello", "");
       //  new GetEventTask(this).run();
-        new GetConfigTask(this).run();
+        new GetEventsTask(this).run();
     }
 
     @Override
