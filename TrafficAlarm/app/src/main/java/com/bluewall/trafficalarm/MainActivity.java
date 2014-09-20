@@ -58,7 +58,7 @@ public class MainActivity extends Activity
        // DFace.getTTDSConfig();
        // Log.i("Hello", "");
       //  new GetEventTask(this).run();
-        new GetEventsTask(this).run();
+        new GetConfigTask(this).run();
     }
 
     @Override

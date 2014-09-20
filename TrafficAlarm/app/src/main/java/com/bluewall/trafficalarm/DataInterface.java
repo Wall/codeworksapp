@@ -2,6 +2,8 @@ package com.bluewall.trafficalarm;
 
 import android.util.Log;
 
+import com.bluewall.trafficalarm.model.RealTimeConfig;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -10,6 +12,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,7 +40,7 @@ public class DataInterface {
         return response;
     }
 
-    public static int getConfig() throws IOException {
+    public static int getConfig() throws IOException, JSONException {
 
         URL cUrl = new URL(CONFIG_URL);
         HttpClient httpClient = new DefaultHttpClient();
@@ -55,7 +59,22 @@ public class DataInterface {
 
         String json = convertStreamToString(responseEntity.getContent());
 
-        Log.i("STREAM",json);
+        JSONObject jObject  = new JSONObject(json);
+        JSONObject resources = jObject.getJSONObject("resources");
+
+        JSONObject self = resources.getJSONObject("self");
+        JSONObject events = resources.getJSONObject("events");
+        JSONObject progress = resources.getJSONObject("progress");
+        JSONObject route = resources.getJSONObject("route");
+
+        String routeConfigUrl = route.getString("href");
+        String selfConfigUrl = self.getString("href");
+        String progressConfigUrl = progress.getString("href");
+        String eventsConfigUrl = events.getString("href");
+
+        RealTimeConfig RTC = new RealTimeConfig(selfConfigUrl,routeConfigUrl,progressConfigUrl,eventsConfigUrl);
+
+        Log.i("STREAM",routeConfigUrl);
 
 
 
