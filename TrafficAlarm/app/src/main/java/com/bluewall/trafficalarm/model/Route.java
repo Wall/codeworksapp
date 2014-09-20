@@ -6,11 +6,11 @@ package com.bluewall.trafficalarm.model;
 public class Route {
 
     private String route;
-    private long standardTravelTime;
+    private long minTravelTime;
+    private long maxTravelTime;
 
-    public Route(String route, long standardTravelTime) {
+    public Route(String route ) {
         this.route = route;
-        this.standardTravelTime = standardTravelTime;
     }
 
     public String getRoute() {
@@ -21,11 +21,19 @@ public class Route {
         this.route = route;
     }
 
-    public long getStandardTravelTime() {
-        return standardTravelTime;
+    public long getMinTravelTime() {
+        return minTravelTime;
     }
 
-    public void setStandardTravelTime(long standardTravelTime) {
-        this.standardTravelTime = standardTravelTime;
+    public void setMinTravelTime(long minTravelTime) {
+        this.minTravelTime = minTravelTime;
+    }
+
+    public long getMaxTravelTime() {
+        return maxTravelTime;
+    }
+
+    public void setMaxTravelTime(long maxTravelTime) {
+        this.maxTravelTime = maxTravelTime;
     }
 }
