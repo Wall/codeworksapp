@@ -2,8 +2,12 @@ package com.bluewall.trafficalarm;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -149,7 +153,7 @@ public class MainActivity extends Activity
             PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0,intent,0);
 
             AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+5000,pendingIntent);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 5000, pendingIntent);
             //getActivity().startService(intent);
 
         }
