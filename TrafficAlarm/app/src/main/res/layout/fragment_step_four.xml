@@ -6,14 +6,17 @@
     android:orientation="vertical">
 
     <TextView
+        style="@style/Widget.TextView.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="How often will you be taking this route?" />
 
     <RadioGroup
-
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:layout_gravity="center_horizontal">
 
         <RadioButton
             android:id="@+id/rb_once"
@@ -29,31 +32,43 @@
     </RadioGroup>
 
     <RelativeLayout
-        android:visibility="gone"
         android:id="@+id/rl_date_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
+        android:layout_marginTop="50sp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageButton
+
+
             android:id="@+id/button_select_date"
             android:layout_width="wrap_content"
+            android:src="@drawable/calendar"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_height="wrap_content"
             android:text="Select" />
-        <EditText
+
+        <TextView
             android:id="@+id/edit_text_date"
-            android:layout_toLeftOf="@id/button_select_date"
-            android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
+            style="@style/Widget.TextView.Padded"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/button_select_date"
             android:text="Pick a date" />
     </RelativeLayout>
 
     <LinearLayout
+        android:layout_marginTop="50sp"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
         android:id="@+id/ll_days_of_week"
-        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:visibility="gone">
 
         <ToggleButton
             android:layout_width="wrap_content"

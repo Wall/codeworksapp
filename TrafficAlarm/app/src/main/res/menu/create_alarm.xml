@@ -3,5 +3,6 @@
     tools:context="com.bluewall.trafficalarm.CreateAlarmActivity" >
     <item android:id="@+id/action_next"
         android:title="Next"
+        android:icon="@drawable/right"
         android:showAsAction="always" />
 </menu>

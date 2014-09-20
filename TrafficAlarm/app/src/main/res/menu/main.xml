@@ -3,5 +3,6 @@
     tools:context=".MainActivity" >
     <item android:id="@+id/action_add_alarm"
         android:title="Add"
+        android:icon="@drawable/plus"
         android:showAsAction="always" />
 </menu>

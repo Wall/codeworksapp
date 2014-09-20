@@ -6,12 +6,15 @@
     android:orientation="vertical">
 
     <TextView
+        style="@style/Widget.TextView.Large"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Select destination point" />
 
     <AutoCompleteTextView
         android:id="@+id/auto_complete_location"
+        style="@style/Widget.TextView.Padded"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+    style="@style/Widget.TextView.Padded"
 </LinearLayout>

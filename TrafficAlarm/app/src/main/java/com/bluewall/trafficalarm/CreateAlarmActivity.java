@@ -26,6 +26,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
@@ -322,7 +323,7 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_step_four, container, false);
-            Button btnSelectDate = (Button)rootView.findViewById(R.id.button_select_date);
+            ImageButton btnSelectDate = (ImageButton)rootView.findViewById(R.id.button_select_date);
             final LinearLayout llDaysOfTheWeek = (LinearLayout)rootView.findViewById(R.id.ll_days_of_week);
             final RelativeLayout rlDatePicker = (RelativeLayout)rootView.findViewById(R.id.rl_date_picker);
             RadioButton rbOnce = (RadioButton)rootView.findViewById(R.id.rb_once);
