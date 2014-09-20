@@ -1,5 +1,7 @@
 package com.bluewall.trafficalarm.model;
 
+import android.net.Uri;
+
 import java.util.Date;
 import java.util.List;
 
@@ -15,13 +17,15 @@ public class Alarm {
     private long prepTime;
     private boolean isOneTime;
     private boolean[] daysOfTheWeek;
+    private Uri alarmTone;
 
-    public Alarm(List<Route> routes, Date arrivalTime, long prepTime, boolean isOneTime, boolean[] daysOfTheWeek){
+    public Alarm(List<Route> routes, Date arrivalTime, long prepTime, boolean isOneTime, boolean[] daysOfTheWeek, Uri alarmTone){
         this.routes = routes;
         this.arrivalTime = arrivalTime;
         this.prepTime = prepTime;
         this.isOneTime = isOneTime;
         this.daysOfTheWeek = daysOfTheWeek;
+        this.alarmTone = alarmTone;
     }
 
     public int getAlarmID() {

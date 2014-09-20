@@ -7,6 +7,9 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.os.SystemClock;
+import android.provider.Settings;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,7 +18,7 @@ import android.view.ViewGroup;
 
 //import com.bluewall.trafficalarm.Tasks.GetConfigTask;
 //import com.bluewall.trafficalarm.Tasks.GetEventTask;
-
+import com.bluewall.trafficalarm.services.AlarmCheckService;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -136,6 +139,28 @@ public class MainActivity extends Activity
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
             return rootView;
+        }
+
+        private void startAlarmService(){
+
+            Intent intent = new Intent(getActivity(), AlarmCheckService.class);
+            intent.putExtra("alarm", "Toast this message");
+            intent.putExtra("alarmTone", Settings.System.RINGTONE);
+            PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0,intent,0);
+
+            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+5000,pendingIntent);
+            //getActivity().startService(intent);
+
+        }
+
+        private void stopCurrentAlarm(){
+            Intent intent = new Intent(getActivity(), AlarmCheckService.class);
+            intent.putExtra("alarm", "Toast this message");
+            PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0,intent,0);
+
+            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
+            alarmManager.cancel(pendingIntent);
         }
 
         @Override
