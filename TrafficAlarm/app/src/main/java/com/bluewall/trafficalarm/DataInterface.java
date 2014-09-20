@@ -7,6 +7,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
 
@@ -23,6 +24,8 @@ public class DataInterface {
     final static String CONFIG_URL = "http://ec2-54-79-116-215.ap-southeast-2.compute.amazonaws.com/config";
 
     final static String EVENT_URL = "http://ec2-54-79-116-215.ap-southeast-2.compute.amazonaws.com/events";
+
+    final static String ROUTE_URL = "http://ec2-54-79-116-215.ap-southeast-2.compute.amazonaws.com/route";
 
     private static String convertStreamToString(InputStream is) {
         Scanner s = new Scanner(is, "UTF-8");
@@ -42,7 +45,6 @@ public class DataInterface {
                 new UsernamePasswordCredentials("ttdsUser", "password"),
                 "UTF-8", false));
 
-
         HttpResponse httpResponse = null;
         try {
             httpResponse = httpClient.execute(httpGet);
@@ -51,7 +53,11 @@ public class DataInterface {
         }
         HttpEntity responseEntity = httpResponse.getEntity();
 
-        Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
+        String json = convertStreamToString(responseEntity.getContent());
+
+        Log.i("STREAM",json);
+
+
 
         return 0;
     }
@@ -69,6 +75,30 @@ public class DataInterface {
         HttpResponse httpResponse = null;
         try {
             httpResponse = httpClient.execute(httpGet);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        HttpEntity responseEntity = httpResponse.getEntity();
+
+        Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
+
+        return 0;
+
+    }
+
+    public static int getRoute() throws IOException {
+
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpPost httt = new HttpPost(ROUTE_URL);
+       // httt.
+        httt.addHeader(BasicScheme.authenticate(
+                new UsernamePasswordCredentials("ttdsUser", "password"),
+                "UTF-8", false));
+
+
+        HttpResponse httpResponse = null;
+        try {
+            httpResponse = httpClient.execute(httt);
         } catch (IOException e) {
             e.printStackTrace();
         }
