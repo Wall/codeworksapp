@@ -1,14 +1,20 @@
 package com.bluewall.trafficalarm;
 
+import java.util.Calendar;
 import java.util.Locale;
 
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.os.Bundle;
+
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,11 +23,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 
 import com.bluewall.trafficalarm.adapter.PlacesAutoCompleteAdapter;
 
 
-public class CreateAlarmActivity extends Activity implements ActionBar.TabListener {
+public class CreateAlarmActivity extends FragmentActivity implements ActionBar.TabListener {
 
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -310,7 +322,59 @@ public class CreateAlarmActivity extends Activity implements ActionBar.TabListen
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_step_four, container, false);
+            Button btnSelectDate = (Button)rootView.findViewById(R.id.button_select_date);
+            final LinearLayout llDaysOfTheWeek = (LinearLayout)rootView.findViewById(R.id.ll_days_of_week);
+            final RelativeLayout rlDatePicker = (RelativeLayout)rootView.findViewById(R.id.rl_date_picker);
+            RadioButton rbOnce = (RadioButton)rootView.findViewById(R.id.rb_once);
+            RadioButton rbRepeat = (RadioButton)rootView.findViewById(R.id.rb_repeat);
+            rbOnce.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b){
+                        llDaysOfTheWeek.setVisibility(View.GONE);
+                        rlDatePicker.setVisibility(View.VISIBLE);
+                    }
+                }
+            });
+
+            rbRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if(b){
+                        llDaysOfTheWeek.setVisibility(View.VISIBLE);
+                        rlDatePicker.setVisibility(View.GONE);
+                    }
+                }
+            });
+            btnSelectDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DialogFragment newFragment = new DatePickerFragment();
+                    newFragment.show(getFragmentManager(), "datePicker");
+                }
+            });
+
             return rootView;
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            // Do something with the date chosen by the user
         }
     }
 

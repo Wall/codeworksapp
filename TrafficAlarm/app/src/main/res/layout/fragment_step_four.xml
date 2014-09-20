@@ -11,17 +11,98 @@
         android:text="How often will you be taking this route?" />
 
     <RadioGroup
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RadioButton
+            android:id="@+id/rb_once"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="One Off" />
 
         <RadioButton
+            android:id="@+id/rb_repeat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Repeat" />
     </RadioGroup>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/rl_date_picker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/button_select_date"
+            android:layout_width="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:text="Select" />
+        <EditText
+            android:id="@+id/edit_text_date"
+            android:layout_toLeftOf="@id/button_select_date"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pick a date" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_days_of_week"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="S"
+            android:textOn="S" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="M"
+            android:textOn="M" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="T"
+            android:textOn="T" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="W"
+            android:textOn="W" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="T"
+            android:textOn="T" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="F"
+            android:textOn="F" />
+
+        <ToggleButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textOff="S"
+            android:textOn="S" />
+
+    </LinearLayout>
 </LinearLayout>
