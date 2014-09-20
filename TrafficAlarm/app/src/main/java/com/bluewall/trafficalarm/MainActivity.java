@@ -1,29 +1,20 @@
 package com.bluewall.trafficalarm;
 
-import android.app.Activity;
-
 import android.app.ActionBar;
-import android.app.AlarmManager;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.TextView;
 
-import com.bluewall.trafficalarm.services.AlarmCheckService;
+//import com.bluewall.trafficalarm.Tasks.GetConfigTask;
+//import com.bluewall.trafficalarm.Tasks.GetEventTask;
 
 
 public class MainActivity extends Activity
@@ -39,6 +30,7 @@ public class MainActivity extends Activity
      */
     private CharSequence mTitle;
 
+    //DataInterface DFace;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +44,12 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+       // DFace.getTTDSConfig();
+       // Log.i("Hello", "");
+      //  new GetEventTask(this).run();
     }
+
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -138,47 +135,8 @@ public class MainActivity extends Activity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-
-
-            Button btnStart = (Button) rootView.findViewById(R.id.btn_start_alarm);
-            btnStart.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    startAlarmService();
-                }
-            });
-            Button btnStop = (Button) rootView.findViewById(R.id.btn_stop_alarm);
-            btnStop.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    stopCurrentAlarm();
-                }
-            });
             return rootView;
         }
-
-        private void startAlarmService(){
-
-            Intent intent = new Intent(getActivity(), AlarmCheckService.class);
-            intent.putExtra("alarm", "Toast this message");
-            PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0,intent,0);
-
-            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime()+1000,1000,pendingIntent);
-            //getActivity().startService(intent);
-
-        }
-
-        private void stopCurrentAlarm(){
-            Intent intent = new Intent(getActivity(), AlarmCheckService.class);
-            intent.putExtra("alarm", "Toast this message");
-            PendingIntent pendingIntent = PendingIntent.getService(getActivity(), 0,intent,0);
-
-            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(Context.ALARM_SERVICE);
-            alarmManager.cancel(pendingIntent);
-        }
-
-
 
         @Override
         public void onAttach(Activity activity) {
