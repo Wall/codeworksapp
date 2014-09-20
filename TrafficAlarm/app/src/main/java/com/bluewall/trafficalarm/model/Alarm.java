@@ -8,14 +8,15 @@ import java.util.List;
  */
 public class Alarm {
 
-    private List<String> routes;
+    private int alarmID;
+    private List<Route> routes;
     private Date arrivalTime;
     private Date defaultTime;
     private long prepTime;
     private boolean isOneTime;
     private boolean[] daysOfTheWeek;
 
-    public Alarm(List<String> routes, Date arrivalTime, long prepTime, boolean isOneTime, boolean[] daysOfTheWeek){
+    public Alarm(List<Route> routes, Date arrivalTime, long prepTime, boolean isOneTime, boolean[] daysOfTheWeek){
         this.routes = routes;
         this.arrivalTime = arrivalTime;
         this.prepTime = prepTime;
@@ -23,11 +24,19 @@ public class Alarm {
         this.daysOfTheWeek = daysOfTheWeek;
     }
 
-    public List<String> getRoutes() {
+    public int getAlarmID() {
+        return alarmID;
+    }
+
+    public void setAlarmID(int alarmID) {
+        this.alarmID = alarmID;
+    }
+
+    public List<Route> getRoutes() {
         return routes;
     }
 
-    public void setRoutes(List<String> routes) {
+    public void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
 
