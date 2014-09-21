@@ -108,12 +108,22 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+       if ( getActionBar().getSelectedTab().getPosition() == 4){
+           menu.findItem(R.id.action_next).setIcon(getResources().getDrawable(R.drawable.tick));
+       }else{
+           menu.findItem(R.id.action_next).setIcon(getResources().getDrawable(R.drawable.right));
+       }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_next && (mViewPager.getCurrentItem() != 5)) {
+        if (id == R.id.action_next && (mViewPager.getCurrentItem() != 4)) {
             mViewPager.setCurrentItem(mViewPager.getCurrentItem() + 1);
             return true;
         }
@@ -125,6 +135,9 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         // When the given tab is selected, switch to the corresponding page in
         // the ViewPager.
         mViewPager.setCurrentItem(tab.getPosition());
+        if (tab.getPosition() == 5){
+            invalidateOptionsMenu();
+        }
     }
 
     @Override
