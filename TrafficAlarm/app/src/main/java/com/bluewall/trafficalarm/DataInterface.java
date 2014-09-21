@@ -14,6 +14,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.auth.BasicScheme;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -114,12 +115,35 @@ public class DataInterface {
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(ROUTE_URL);
 
-        StringEntity params = new StringEntity(routeData.getRoute());
-        httpPost.setEntity(params);
+        //StringEntity params = new StringEntity(routeData.getRoute());
 
         httpPost.addHeader(BasicScheme.authenticate(
                 new UsernamePasswordCredentials("ttdsUser", "password"),
                 "UTF-8", false));
+
+
+        httpPost.setHeader("Content-Type",
+                "application/vnd.ttds-route+json");
+
+        //JSONObject ja = new JSONObject();
+
+        //ja.put();
+
+        JSONArray jo = new JSONArray();
+
+        jo.put("vaumEi}xy[r@]dBu@@?l@Yz@e@^Od@SJGLGVMFITYNYFMFU");
+
+        JSONObject mainObj = new JSONObject();
+        mainObj.put("encoded-paths", jo);
+        mainObj.put("arrival-time", 1399437830);
+        mainObj.put("provide-events", false);
+
+        JSONObject hJson = new JSONObject();
+
+        //hJson.put(mainObj);
+        StringEntity params = new StringEntity(mainObj.toString());
+
+        httpPost.setEntity(params);
 
 
         HttpResponse httpResponse = null;
@@ -130,9 +154,12 @@ public class DataInterface {
         }
         HttpEntity responseEntity = httpResponse.getEntity();
 
-        Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
+       // Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
 
         String json = convertStreamToString(responseEntity.getContent());
+
+ //{"route-id":"cb3e6106-ec6f-49a2-b78f-89ec9cb5ed77","system-time":1411272052,"data-time":1411272052,"travel-time":{"min-seconds":1080,"max-seconds":1320}}
+
 
         JSONObject jObject  = new JSONObject(json);
 
@@ -145,6 +172,8 @@ public class DataInterface {
         newRouteData.setMinTravelTime(routeMinSec);
         newRouteData.setMaxTravelTime(routeMaxSec);
         newRouteData.setRouteID(RID);
+
+Log.i("TRAVEL TIME AX",""+newRouteData.getMaxTravelTime());
 
         return newRouteData;
 
