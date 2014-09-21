@@ -109,12 +109,12 @@ public class DataInterface {
 
     }
 
-    public static Route getRoute(Route routeData) throws IOException {
+    public static Route getRoute(Route routeData) throws IOException, JSONException {
 
         HttpClient httpClient = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(ROUTE_URL);
 
-        StringEntity params =new StringEntity(routeData.getRoute());
+        StringEntity params = new StringEntity(routeData.getRoute());
         httpPost.setEntity(params);
 
         httpPost.addHeader(BasicScheme.authenticate(
@@ -132,8 +132,18 @@ public class DataInterface {
 
         Log.i("STREAM",convertStreamToString(responseEntity.getContent()));
 
+        String json = convertStreamToString(responseEntity.getContent());
 
-        Route newRouteData = new Route(responseEntity.getContent().toString());
+        JSONObject jObject  = new JSONObject(json);
+
+        JSONObject RID = jObject.getJSONObject("route-id");
+        JSONObject TT = jObject.getJSONObject("travel-time");
+        Long routeMinSec = TT.getLong("min-seconds");
+        Long routeMaxSec = TT.getLong("max-seconds");
+
+        Route newRouteData = new Route(routeData.getRoute());
+        newRouteData.setMinTravelTime(routeMinSec);
+        newRouteData.setMaxTravelTime(routeMaxSec);
 
         return newRouteData;
 
