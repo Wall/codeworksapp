@@ -58,6 +58,7 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
      * The {@link ViewPager} that will host the section contents.
      */
     ViewPager mViewPager;
+    private ActionBar actionBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +66,7 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         setContentView(R.layout.activity_create_alarm);
 
         // Set up the action bar.
-        final ActionBar actionBar = getActionBar();
+     actionBar = getActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         // Create the adapter that will return a fragment for each of the three
@@ -109,7 +110,7 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-       if ( getActionBar().getSelectedTab().getPosition() == 4){
+       if ( actionBar.getSelectedTab().getPosition() == 4){
            menu.findItem(R.id.action_next).setIcon(getResources().getDrawable(R.drawable.tick));
        }else{
            menu.findItem(R.id.action_next).setIcon(getResources().getDrawable(R.drawable.right));

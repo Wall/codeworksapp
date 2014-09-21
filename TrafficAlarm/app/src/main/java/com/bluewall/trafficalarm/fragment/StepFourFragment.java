@@ -75,6 +75,8 @@ public class StepFourFragment extends Fragment {
                 }
             }
         });
+
+        rbOnce.setChecked(true);
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
