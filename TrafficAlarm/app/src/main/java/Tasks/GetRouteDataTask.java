@@ -2,8 +2,10 @@ package Tasks;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.bluewall.trafficalarm.DataInterface;
+import com.bluewall.trafficalarm.GoogleRouteAPI;
 import com.bluewall.trafficalarm.MainActivity;
 import com.bluewall.trafficalarm.model.Route;
 
@@ -33,6 +35,7 @@ public class GetRouteDataTask {
         protected Route doInBackground(Void... urls) {
 
             try {
+                Log.d("route string", GoogleRouteAPI.shortestDistance("26-32 Pirrama Road, Pyrmont, New South Wales", "17 Bridge Street, Sydney, New South Wales"));
                 return DataInterface.getRoute(rData);
 
             } catch (Exception e) {

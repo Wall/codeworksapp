@@ -23,13 +23,18 @@ public class GoogleRouteAPI {
 
     public static String shortestDistance(String origin, String destination) {
 
-        String params ="json?origins=" + origin + "&destinations=" + destination + "&key=" + Constants.GOOGLE_API_KEY;
+        String params = null;
+        try {
+            params = "json?origin=" + URLEncoder.encode(origin, "UTF-8") + "&destination=" + URLEncoder.encode(destination, "UTF-8") + "&key=" + Constants.GOOGLE_API_KEY;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         System.out.println("PARAMS: " + params);
         return query(params);
     }
 
     public static String shortestDistance(double startx, double starty, double destx, double desty) {
-        String params ="json?origins=" + startx + "," + starty + "&destinations=" + destx + "," + desty;
+        String params ="json?origin=" + startx + "," + starty + "&destination=" + destx + "," + desty;
         return query(params);
     }
 
@@ -58,7 +63,7 @@ public class GoogleRouteAPI {
                 e.printStackTrace();
             }
             conn.setRequestProperty("Content-Type", type);
-            conn.setRequestProperty("Content-Length", String.valueOf(encodedData.length()));
+            //conn.setRequestProperty("Content-Length", String.valueOf(encodedData.length()));
 
             os = conn.getOutputStream();
 

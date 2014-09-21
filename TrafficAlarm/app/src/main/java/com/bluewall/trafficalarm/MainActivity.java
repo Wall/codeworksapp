@@ -23,9 +23,11 @@ import android.widget.Button;
 
 import Tasks.GetConfigTask;
 import Tasks.GetEventsTask;
+import Tasks.GetRouteDataTask;
 
 //import com.bluewall.trafficalarm.Tasks.GetConfigTask;
 //import com.bluewall.trafficalarm.Tasks.GetEventTask;
+import com.bluewall.trafficalarm.model.Route;
 import com.bluewall.trafficalarm.services.AlarmCheckService;
 
 public class MainActivity extends Activity
@@ -60,6 +62,7 @@ public class MainActivity extends Activity
        // Log.i("Hello", "");
       //  new GetEventTask(this).run();
         new GetConfigTask(this).run();
+        new GetRouteDataTask(this,new Route("")).run();
     }
 
     @Override
@@ -154,6 +157,8 @@ public class MainActivity extends Activity
                     stopCurrentAlarm();
                 }
             });
+
+
             return rootView;
         }
 
