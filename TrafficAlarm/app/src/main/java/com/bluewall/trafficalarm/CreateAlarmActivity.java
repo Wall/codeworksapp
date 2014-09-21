@@ -32,6 +32,11 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 
 import com.bluewall.trafficalarm.adapter.PlacesAutoCompleteAdapter;
+import com.bluewall.trafficalarm.fragment.StepFiveFragment;
+import com.bluewall.trafficalarm.fragment.StepFourFragment;
+import com.bluewall.trafficalarm.fragment.StepOneFragment;
+import com.bluewall.trafficalarm.fragment.StepThreeFragment;
+import com.bluewall.trafficalarm.fragment.StepTwoFragment;
 
 
 public class CreateAlarmActivity extends FragmentActivity implements ActionBar.TabListener {
@@ -141,17 +146,17 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return StepOneFragment.newInstance(position + 1);
+                    return new StepOneFragment();
                 case 1:
-                    return StepTwoFragment.newInstance(position + 1);
+                    return new StepTwoFragment();
                 case 2:
-                    return StepThreeFragment.newInstance(position + 1);
+                    return new StepThreeFragment();
                 case 3:
-                    return StepFourFragment.newInstance(position + 1);
+                    return new StepFourFragment();
                 case 4:
-                    return StepFiveFragment.newInstance(position + 1);
+                    return new StepFiveFragment();
                 default:
-                    return StepOneFragment.newInstance(position + 1);
+                    return new StepOneFragment();
             }
 
             // getItem is called to instantiate the fragment for the given page.
@@ -173,243 +178,9 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         }
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StepOneFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static StepOneFragment newInstance(int sectionNumber) {
-            StepOneFragment fragment = new StepOneFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public StepOneFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_step_one, container, false);
-            AutoCompleteTextView autoCompView = (AutoCompleteTextView) rootView.findViewById(R.id.auto_complete_location);
-            autoCompView.setAdapter(new PlacesAutoCompleteAdapter(getActivity()
-                    , android.R.layout.simple_list_item_1));
-            autoCompView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                }
-            });
-
-            return rootView;
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StepTwoFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static StepTwoFragment newInstance(int sectionNumber) {
-            StepTwoFragment fragment = new StepTwoFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public StepTwoFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_step_two, container, false);
-            AutoCompleteTextView autoCompView = (AutoCompleteTextView) rootView.findViewById(R.id.auto_complete_location);
-            autoCompView.setAdapter(new PlacesAutoCompleteAdapter(getActivity()
-                    , android.R.layout.simple_list_item_1));
-            autoCompView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                }
-            });
 
 
-            return rootView;
-        }
-    }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StepThreeFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
 
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static StepThreeFragment newInstance(int sectionNumber) {
-            StepThreeFragment fragment = new StepThreeFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
 
-        public StepThreeFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_step_three, container, false);
-
-            return rootView;
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StepFourFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static StepFourFragment newInstance(int sectionNumber) {
-            StepFourFragment fragment = new StepFourFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public StepFourFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_step_four, container, false);
-            ImageButton btnSelectDate = (ImageButton)rootView.findViewById(R.id.button_select_date);
-            final LinearLayout llDaysOfTheWeek = (LinearLayout)rootView.findViewById(R.id.ll_days_of_week);
-            final RelativeLayout rlDatePicker = (RelativeLayout)rootView.findViewById(R.id.rl_date_picker);
-            RadioButton rbOnce = (RadioButton)rootView.findViewById(R.id.rb_once);
-            RadioButton rbRepeat = (RadioButton)rootView.findViewById(R.id.rb_repeat);
-            rbOnce.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if (b){
-                        llDaysOfTheWeek.setVisibility(View.GONE);
-                        rlDatePicker.setVisibility(View.VISIBLE);
-                    }
-                }
-            });
-
-            rbRepeat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    if(b){
-                        llDaysOfTheWeek.setVisibility(View.VISIBLE);
-                        rlDatePicker.setVisibility(View.GONE);
-                    }
-                }
-            });
-            btnSelectDate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    DialogFragment newFragment = new DatePickerFragment();
-                    newFragment.show(getFragmentManager(), "datePicker");
-                }
-            });
-
-            return rootView;
-        }
-    }
-
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar c = Calendar.getInstance();
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class StepFiveFragment extends Fragment {
-        /**
-         * The fragment argument representing the section number for this
-         * fragment.
-         */
-        private static final String ARG_SECTION_NUMBER = "section_number";
-
-        /**
-         * Returns a new instance of this fragment for the given section
-         * number.
-         */
-        public static StepFiveFragment newInstance(int sectionNumber) {
-            StepFiveFragment fragment = new StepFiveFragment();
-            Bundle args = new Bundle();
-            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
-            fragment.setArguments(args);
-            return fragment;
-        }
-
-        public StepFiveFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_step_five, container, false);
-
-            return rootView;
-        }
-    }
 }
