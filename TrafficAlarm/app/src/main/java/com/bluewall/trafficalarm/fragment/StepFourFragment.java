@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.bluewall.trafficalarm.R;
@@ -49,6 +50,8 @@ public class StepFourFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_step_four, container, false);
         ImageButton btnSelectDate = (ImageButton)rootView.findViewById(R.id.button_select_date);
         ImageButton btnSelectTime = (ImageButton)rootView.findViewById(R.id.button_select_time);
+        final TextView txtTime = (TextView)rootView.findViewById(R.id.edit_text_time);
+        final TextView txtDate = (TextView)rootView.findViewById(R.id.edit_text_date);
         final LinearLayout llDaysOfTheWeek = (LinearLayout)rootView.findViewById(R.id.ll_days_of_week);
         final RelativeLayout rlDatePicker = (RelativeLayout)rootView.findViewById(R.id.rl_date_picker);
         RadioButton rbOnce = (RadioButton)rootView.findViewById(R.id.rb_once);
@@ -75,7 +78,7 @@ public class StepFourFragment extends Fragment {
         btnSelectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DialogFragment newFragment = new DatePickerFragment();
+                DialogFragment newFragment = new DatePickerFragment(txtDate);
                 newFragment.show(getFragmentManager(), "datePicker");
             }
         });
@@ -83,7 +86,7 @@ public class StepFourFragment extends Fragment {
         btnSelectTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TimePickerFragment newFragment = new TimePickerFragment();
+                TimePickerFragment newFragment = new TimePickerFragment(txtTime);
                 newFragment.show(getFragmentManager(), "timePicker");
             }
         });
@@ -94,6 +97,10 @@ public class StepFourFragment extends Fragment {
     public static class TimePickerFragment extends DialogFragment
             implements TimePickerDialog.OnTimeSetListener {
 
+        TextView textTime;
+        public TimePickerFragment(TextView text){
+            textTime = text;
+        }
         @Override
 
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -105,13 +112,18 @@ public class StepFourFragment extends Fragment {
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            //TODO: somthing
+           textTime.setText("" + hourOfDay + " : " + minute);
         }
 
     }
 
     public static class DatePickerFragment extends DialogFragment
             implements DatePickerDialog.OnDateSetListener {
+    TextView txtDate;
+
+        public DatePickerFragment(TextView text){
+            txtDate = text;
+        }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -126,7 +138,9 @@ public class StepFourFragment extends Fragment {
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
+           txtDate.setText((new StringBuilder().append(day).append(month + 1)
+                   .append("-").append("-").append(year)
+                   .append(" ")));
         }
     }
 }

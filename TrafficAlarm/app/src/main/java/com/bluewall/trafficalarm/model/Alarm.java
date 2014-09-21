@@ -19,6 +19,9 @@ public class Alarm {
     private boolean[] daysOfTheWeek;
     private Uri alarmTone;
 
+    public Alarm(){
+
+    }
     public Alarm(List<Route> routes, Date arrivalTime, long prepTime, boolean isOneTime, boolean[] daysOfTheWeek, Uri alarmTone){
         this.routes = routes;
         this.arrivalTime = arrivalTime;

@@ -190,7 +190,6 @@ public class CreateAlarmActivity extends FragmentActivity implements ActionBar.T
         public CharSequence getPageTitle(int position) {
             Locale l = Locale.getDefault();
             return getString(R.string.title_section).toUpperCase(l) + " " + (position + 1);
-
         }
     }
 

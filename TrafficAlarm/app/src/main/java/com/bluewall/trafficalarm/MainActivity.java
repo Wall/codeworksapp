@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListView;
 
 import Tasks.GetConfigTask;
 import Tasks.GetEventsTask;
@@ -28,7 +29,14 @@ import Tasks.GetRouteDataTask;
 //import com.bluewall.trafficalarm.Tasks.GetConfigTask;
 //import com.bluewall.trafficalarm.Tasks.GetEventTask;
 import com.bluewall.trafficalarm.model.Route;
+import com.bluewall.trafficalarm.adapter.AlarmAdapter;
+import com.bluewall.trafficalarm.model.Alarm;
 import com.bluewall.trafficalarm.services.AlarmCheckService;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MainActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -50,7 +58,7 @@ public class MainActivity extends Activity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = "Menu";
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -75,8 +83,7 @@ public class MainActivity extends Activity
     }
 
     public void onSectionAttached(int number) {
-
-                mTitle = getString(R.string.title_section) + (number + 1);
+                mTitle = "TRAFFIC ALARM";
     }
 
     public void restoreActionBar() {
@@ -157,8 +164,23 @@ public class MainActivity extends Activity
                     stopCurrentAlarm();
                 }
             });
+            ListView listView = (ListView) rootView.findViewById(R.id.list_alarms);
+            Alarm alarm = new Alarm();
+            alarm.setAlarmID(1);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new Date());
+            cal.add(Calendar.HOUR, +3);
 
 
+            alarm.setArrivalTime(cal.getTime());
+            boolean[] daysBoolean = {false,true,true,true,false,false};
+            alarm.setDaysOfTheWeek(daysBoolean);
+            alarm.setPrepTime(1);
+            alarm.setDefaultTime(cal.getTime());
+            List<Alarm> alarmList = new LinkedList<Alarm>();
+            alarmList.add(alarm);
+            AlarmAdapter adapter = new AlarmAdapter(getActivity(), alarmList);
+            listView.setAdapter(adapter);
             return rootView;
         }
 
