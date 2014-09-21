@@ -15,8 +15,8 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
-        android:layout_gravity="center_horizontal">
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20sp">
 
         <RadioButton
             android:id="@+id/rb_once"
@@ -44,30 +44,32 @@
 
             android:id="@+id/button_select_date"
             android:layout_width="wrap_content"
-            android:src="@drawable/calendar"
-            android:layout_centerHorizontal="true"
-            android:background="@null"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:layout_centerHorizontal="true"
+            android:background="@null"
+            android:src="@drawable/calendar"
             android:text="Select" />
 
         <TextView
             android:id="@+id/edit_text_date"
-            android:layout_width="wrap_content"
             style="@style/Widget.TextView.Padded"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
             android:layout_below="@id/button_select_date"
+            android:layout_centerHorizontal="true"
             android:text="Pick a date" />
+
+
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
         android:id="@+id/ll_days_of_week"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="20sp"
+        android:layout_marginRight="20sp"
+        android:layout_marginTop="50sp"
         android:visibility="gone">
 
         <ToggleButton
@@ -120,4 +122,25 @@
             android:textOn="S" />
 
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/button_select_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:background="@null"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="5dp"
+        android:src="@drawable/clock"
+        />
+
+    <TextView
+        android:id="@+id/edit_text_time"
+        android:layout_gravity="center_horizontal"
+        style="@style/Widget.TextView.Padded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Pick a time" />
 </LinearLayout>
