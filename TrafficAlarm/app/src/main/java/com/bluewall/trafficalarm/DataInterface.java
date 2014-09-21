@@ -136,7 +136,7 @@ public class DataInterface {
 
         JSONObject jObject  = new JSONObject(json);
 
-        JSONObject RID = jObject.getJSONObject("route-id");
+        String RID = jObject.getString("route-id");
         JSONObject TT = jObject.getJSONObject("travel-time");
         Long routeMinSec = TT.getLong("min-seconds");
         Long routeMaxSec = TT.getLong("max-seconds");
@@ -144,6 +144,7 @@ public class DataInterface {
         Route newRouteData = new Route(routeData.getRoute());
         newRouteData.setMinTravelTime(routeMinSec);
         newRouteData.setMaxTravelTime(routeMaxSec);
+        newRouteData.setRouteID(RID);
 
         return newRouteData;
 

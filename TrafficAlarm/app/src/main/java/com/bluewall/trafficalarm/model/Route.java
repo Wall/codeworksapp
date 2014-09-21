@@ -6,6 +6,7 @@ package com.bluewall.trafficalarm.model;
 public class Route {
 
     private String route;
+    private String routeID;
     private long minTravelTime;
     private long maxTravelTime;
 
@@ -35,5 +36,18 @@ public class Route {
 
     public void setMaxTravelTime(long maxTravelTime) {
         this.maxTravelTime = maxTravelTime;
+    }
+
+    public void setRouteID(String ID){
+        routeID = ID;
+
+    }
+
+    public String getRouteID(){
+        return  routeID;
+    }
+
+    public void getPolylinesFromRoute(){
+
     }
 }
