@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 
 import com.bluewall.trafficalarm.R;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -41,18 +41,17 @@ public class StepFiveFragment extends Fragment {
     @Override
     public void onStart() {
 
-
         if(map == null) {
             map = mapFragment.getMap();
-            map.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            mapFragment.getView().getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
-                public void onMapLoaded() {
+                public void onGlobalLayout() {
                     map.getUiSettings().setAllGesturesEnabled(false);
-                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-151,39), 10));
+                    map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(-33.86785, 151.20732), 10));
+                    mapFragment.getView().getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
             });
         }
-
 
         super.onStart();
     }

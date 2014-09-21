@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import Tasks.GetConfigTask;
 import Tasks.GetEventsTask;
@@ -53,6 +54,8 @@ public class MainActivity extends Activity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+
 
        // Log.i("Hello", "");
       //  new GetEventTask(this).run();
@@ -137,6 +140,20 @@ public class MainActivity extends Activity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+            Button btnStartAlarm = (Button) rootView.findViewById(R.id.btn_start_alarm);
+            btnStartAlarm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startAlarmService();
+                }
+            });
+            Button btnStopAlarm = (Button) rootView.findViewById(R.id.btn_stop_alarm);
+            btnStopAlarm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    stopCurrentAlarm();
+                }
+            });
             return rootView;
         }
 
