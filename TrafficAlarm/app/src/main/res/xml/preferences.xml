@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="Set Preparation Time">
+
+        <EditTextPreference
+            android:key="@string/key_prep_time"
+            android:title="@string/title_prep_time"
+            android:summary="@string/summary_prep_time"
+            android:inputType="number"
+            android:dialogTitle="@string/dialog_title_prep_time" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Set alarm Interval">
+
+        <EditTextPreference
+            android:key="@string/key_alarm_interval"
+            android:title="@string/title_alarm_interval"
+            android:summary="@string/summary_alarm_interval"
+            android:inputType="number"
+            android:dialogTitle="@string/dialog_title_alarm_interval" />
+
+    </PreferenceCategory>
+
+
+</PreferenceScreen>

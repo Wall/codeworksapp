@@ -10,4 +10,14 @@
     <string name="title_activity_create_alarm">CreateAlarmActivity</string>
     <string name="hello_world">Hello world!</string>
 
+    <string name="key_prep_time">key_prep</string>
+    <string name="key_alarm_interval">key_alarm</string>
+    <string name="dialog_title_alarm_interval">How frequently do you want to check alarm in minutes e.g. 5</string>
+    <string name="summary_alarm_interval">How frequently do you want to check alarm</string>
+    <string name="title_alarm_interval">Alarm Interval</string>
+
+    <string name="dialog_title_prep_time">Time in minutes that you need for preparation in minutes e.g. 60</string>
+    <string name="summary_prep_time">Time in minutes that you need for preparation</string>
+    <string name="title_prep_time">Preparation Time</string>
+
 </resources>
