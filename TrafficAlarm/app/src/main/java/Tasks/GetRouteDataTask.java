@@ -12,13 +12,15 @@ import com.bluewall.trafficalarm.model.Route;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.concurrent.ExecutionException;
+
 /**
  * Created by Barney on 21/09/2014.
  */
 public class GetRouteDataTask {
 
     private Context context;
-    private Route rData;
+    public Route rData;
     protected MainActivity activity;
 
 
@@ -29,7 +31,15 @@ public class GetRouteDataTask {
     }
 
     public void run() {
-        new GetRouteDataAsyncTask().execute((Void) null);
+        GetRouteDataAsyncTask tmp = new GetRouteDataAsyncTask();
+        tmp.execute();
+        try {
+            rData = tmp.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
     private class GetRouteDataAsyncTask extends
@@ -64,6 +74,7 @@ public class GetRouteDataTask {
         }
 
         protected void onPostExecute(Route result) {
+            //rData = result;
             //Log.d("route string", ""+result.getMaxTravelTime());
            // SharedPrefsUtils.saveConfigFile(context, result);
         }

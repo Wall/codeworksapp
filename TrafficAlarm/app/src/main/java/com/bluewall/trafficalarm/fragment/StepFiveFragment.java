@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
 import com.bluewall.trafficalarm.R;
+import com.bluewall.trafficalarm.model.Route;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -23,8 +24,11 @@ import java.util.List;
 import java.util.ArrayList;
 
 import android.graphics.Color;
+import android.widget.TextView;
 
 import java.util.Arrays;
+
+import Tasks.GetRouteDataTask;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -54,6 +58,8 @@ public class StepFiveFragment extends Fragment {
             new LatLng(-33.842992, 151.210929)
     };
 
+    private GetRouteDataTask getRouteDataTask;
+    private TextView textTravelTime;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,9 +67,11 @@ public class StepFiveFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_step_five, container, false);
 
         mapFragment = MapFragment.newInstance();
-
+        getRouteDataTask = new GetRouteDataTask(getActivity(),new Route(""));
+        getRouteDataTask.run();
         getChildFragmentManager().beginTransaction().add(R.id.map_layout, mapFragment).commit();
 
+        textTravelTime = (TextView) rootView.findViewById(R.id.text_travel_time);
         return rootView;
     }
 
@@ -82,6 +90,9 @@ public class StepFiveFragment extends Fragment {
 
     @Override
     public void onStart() {
+        Route route = getRouteDataTask.rData;
+
+        textTravelTime.setText("Average travel time: " + ((route.getMaxTravelTime()+route.getMinTravelTime())/2)/60 + " mins");
 
         if (map == null) {
             map = mapFragment.getMap();
