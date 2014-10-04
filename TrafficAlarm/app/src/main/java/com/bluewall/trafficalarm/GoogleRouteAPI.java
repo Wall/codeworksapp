@@ -18,15 +18,18 @@ import java.io.UnsupportedEncodingException;
 public class GoogleRouteAPI {
 
     private static final String ENCODE = "UTF-8";
-    private static String BASE_URL = "http://maps.googleapis.com/maps/api/distancematrix/";
+    //private static String BASE_URL = "http://maps.googleapis.com/maps/api/distancematrix/";
+    private static String BASE_URL = "https://maps.googleapis.com/maps/api/directions/";
 
     public static String shortestDistance(String origin, String destination) {
-        String params ="json?origins=" + origin + "&destinations=" + destination;
+
+        String params ="json?origins=" + origin + "&destinations=" + destination + "&key=" + Constants.GOOGLE_API_KEY;
+        System.out.println("PARAMS: " + params);
         return query(params);
     }
 
     public static String shortestDistance(double startx, double starty, double destx, double desty) {
-        String params ="/json?origins=" + startx + "," + starty + "&destinations=" + destx + "," + desty;
+        String params ="json?origins=" + startx + "," + starty + "&destinations=" + destx + "," + desty;
         return query(params);
     }
 
